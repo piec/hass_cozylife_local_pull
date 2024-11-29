@@ -34,7 +34,7 @@ def setup(hass: HomeAssistant, config: ConfigType) -> bool:
         _LOGGER.info('discover nothing')
         return True
 
-    _LOGGER.info('try conncet ip_list:', ip_list)
+    _LOGGER.info('try connect ip_list: %s', ip_list)
     lang_from_config = (config[DOMAIN].get('lang') if config[DOMAIN].get('lang') is not None else LANG)
     get_pid_list(lang_from_config)
 
