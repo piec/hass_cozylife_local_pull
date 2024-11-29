@@ -24,7 +24,13 @@ def setup(hass: HomeAssistant, config: ConfigType) -> bool:
     config:{'lang': 'zh', 'ip': ['192.168.5.201', '192.168.5.202', '192.168.5.1']}
 }
     """
-    ip = get_ip()
+    ip = []
+    if config[DOMAIN].get('discover', True):
+        _LOGGER.info('discover devices')
+        ip += get_ip()
+    else:
+        _LOGGER.info('do not discover devices')
+
     ip_from_config = config[DOMAIN].get('ip') if config[DOMAIN].get('ip') is not None else []    
     ip += ip_from_config
     ip_list = []
