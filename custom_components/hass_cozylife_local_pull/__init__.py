@@ -12,12 +12,13 @@ from .const import (
 from .utils import get_pid_list
 from .udp_discover import get_ip
 from .tcp_client import tcp_client
+import asyncio
 
 
 _LOGGER = logging.getLogger(__name__)
 
 
-def setup(hass: HomeAssistant, config: ConfigType) -> bool:
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     
     """
     TODO:timer discover
@@ -52,7 +53,10 @@ def setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
     #wait for get device info from tcp conncetion
     #but it is bad
-    time.sleep(3)
+    _LOGGER.info('sleep...')
+    # time.sleep(3)
+    await asyncio.sleep(3)
+    _LOGGER.info('sleep ok')
     # _LOGGER.info('setup', hass, config)
     # hass.helpers.discovery.load_platform('sensor', DOMAIN, {}, config)
     hass.helpers.discovery.load_platform('light', DOMAIN, {}, config)
